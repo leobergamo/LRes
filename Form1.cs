@@ -34,7 +34,25 @@ namespace LRes
 
         private void btnTest_Click(object sender, EventArgs e)
         {
+            DisplaySettingsInfo object_CurrentDisplaySettingInfo = Api.getCurrentDisplaySettings();
+            PublicStructures.Struct_DevMode struct_origDevMode = object_CurrentDisplaySettingInfo.getStructDevMode();
+            PublicStructures.Struct_DevMode struct_newDevMode = object_CurrentDisplaySettingInfo.getStructDevMode();
+            
+            int int_width = (this.comboBox_DisplaySettingsInfo.SelectedItem as DisplaySettingsInfoComboItem).object_displaySettingsInfo.getWidth();
+            int int_height = (this.comboBox_DisplaySettingsInfo.SelectedItem as DisplaySettingsInfoComboItem).object_displaySettingsInfo.getHeight();
+            
+            struct_newDevMode.dmPelsWidth = int_width;
+            struct_newDevMode.dmPelsHeight = int_height;
 
+            if (WinApi.ChangeDisplaySettings(ref struct_newDevMode, 0) == PublicConstants.DISP_CHANGE_SUCCESSFUL)
+            {
+                Thread.Sleep(5000);
+                WinApi.ChangeDisplaySettings(ref struct_origDevMode, 0);
+            }
+            else
+            {
+                MessageBox.Show("Unable to change display settings!");
+            }
         }
     }
 }
