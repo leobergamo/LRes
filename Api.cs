@@ -33,7 +33,7 @@ namespace LRes
             return listOfObjects_DisplayResolutionInfo;
         }
 
-        public static void getCurrentDisplaySettings()
+        public static DisplaySettingsInfo? getCurrentDisplaySettings()
         {
 
             /*  
@@ -46,12 +46,23 @@ namespace LRes
 
             Debug.WriteLine("Gathering current display settings...\n");
 
-            PublicStructures.Struct_DevMode struct_DevMode = new PublicStructures.Struct_DevMode();
+            PublicStructures.Struct_DevMode struct_devMode = new PublicStructures.Struct_DevMode();
+            DisplaySettingsInfo object_displaySettingsInfo;
 
-            struct_DevMode.dmSize = (short)Marshal.SizeOf(struct_DevMode);
-            if (WinApi.EnumDisplaySettings(null, PublicConstants.ENUM_CURRENT_SETTINGS, ref struct_DevMode))
+            struct_devMode.dmSize = (short)Marshal.SizeOf(struct_devMode);
+            if (WinApi.EnumDisplaySettings(null, PublicConstants.ENUM_CURRENT_SETTINGS, ref struct_devMode))
             {
-                PublicVariables.Struct_CurrDevMode = struct_DevMode;
+                object_displaySettingsInfo = new DisplaySettingsInfo(
+                    struct_devMode.dmPelsWidth, 
+                    struct_devMode.dmPelsHeight, 
+                    struct_devMode.dmDisplayFrequency, 
+                    struct_devMode.dmBitsPerPel, 
+                    struct_devMode
+                );
+                return object_displaySettingsInfo;
+            } else
+            {
+                return null;
             }
         }
 

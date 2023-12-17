@@ -8,12 +8,12 @@ namespace LRes
 {
     internal class DisplaySettingsInfoComboItem
     {
-        public string string_Text { get; set; } = string.Empty;
-        public DisplaySettingsInfo? object_Value { get; set; }
+        public string string_text { get; set; } = string.Empty;
+        public DisplaySettingsInfo? object_displaySettingsInfo { get; set; }
 
         public override string ToString()
         {
-            return string_Text;
+            return string_text;
         }
     }
 }

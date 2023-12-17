@@ -31,11 +31,13 @@
             panel1 = new Panel();
             comboBox_DisplaySettingsInfo = new ComboBox();
             label1 = new Label();
+            btnTest = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
+            panel1.Controls.Add(btnTest);
             panel1.Controls.Add(comboBox_DisplaySettingsInfo);
             panel1.Controls.Add(label1);
             panel1.Location = new Point(12, 12);
@@ -62,6 +64,16 @@
             label1.TabIndex = 0;
             label1.Text = "Available Resolutions";
             // 
+            // btnTest
+            // 
+            btnTest.Location = new Point(698, 47);
+            btnTest.Name = "btnTest";
+            btnTest.Size = new Size(75, 23);
+            btnTest.TabIndex = 2;
+            btnTest.Text = "Test";
+            btnTest.UseVisualStyleBackColor = true;
+            btnTest.Click += btnTest_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -81,5 +93,6 @@
         private Panel panel1;
         private ComboBox comboBox_DisplaySettingsInfo;
         private Label label1;
+        private Button btnTest;
     }
 }
