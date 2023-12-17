@@ -9,6 +9,6 @@ namespace LRes
 {
     internal class PublicVariables
     {
-
+        public static PublicStructures.Struct_DevMode Struct_CurrDevMode;
     }
 }

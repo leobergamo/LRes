@@ -8,7 +8,10 @@ namespace LRes
 {
     internal class PublicConstants
     {
-        const int ENUM_CURRENT_SETTINGS = -1;
-        const int ENUM_REGISTRY_SETTINGS = -2;
+        public const int ENUM_CURRENT_SETTINGS = -1;
+        public const int ENUM_REGISTRY_SETTINGS = -2;
+        public const int DISP_CHANGE_SUCCESSFUL = 0;
+        public const int DISP_CHANGE_BADMODE = -2;
+        public const int DISP_CHANGE_RESTART = 1;
     }
 }
