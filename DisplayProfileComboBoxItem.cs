@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace LRes
 {
-    internal class DisplaySettingsInfoComboItem
+    internal class DisplayProfileComboBoxItem
     {
         public string string_text { get; set; } = string.Empty;
-        public DisplaySettingsInfo? object_displaySettingsInfo { get; set; }
+        public DisplayProfile? object_displayProfile { get; set; }
 
         public override string ToString()
         {

@@ -9,6 +9,8 @@ namespace LRes
 {
     internal class PublicVariables
     {
-        public static DisplaySettingsInfo? Object_CurrentDisplaySettingInfo;
+        public static DisplayProfile? Object_CurrentDisplayProfile;
+        public static DisplayProfile? Object_SelectedDisplayProfile;
+        public static String String_AppWorkingDirectory = Directory.GetParent(Application.ExecutablePath).FullName;
     }
 }

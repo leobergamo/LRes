@@ -8,7 +8,7 @@ using static LRes.PublicStructures;
 
 namespace LRes
 {
-    internal class DisplaySettingsInfo
+    internal class DisplayProfile
     {
         private int Int_Width;
         private int Int_Height;
@@ -16,7 +16,7 @@ namespace LRes
         private int Int_ColorDepth;
         private Struct_DevMode Struct_DevMode;
 
-        public DisplaySettingsInfo(int int_width, int int_height, int int_frequency, int int_colorDepth, Struct_DevMode struct_devMod) { 
+        public DisplayProfile(int int_width, int int_height, int int_frequency, int int_colorDepth, Struct_DevMode struct_devMod) { 
             this.Int_Width = int_width;
             this.Int_Height = int_height;
             this.Int_Frequency = int_frequency;
@@ -51,7 +51,8 @@ namespace LRes
 
         public string ToString()
         {
-            return string.Format("Width:{0} Height:{1} Frequency:{2} Color Depth:{3}", this.Int_Width, this.Int_Height, this.Int_Frequency, this.Int_ColorDepth);
+            return string.Format("Width:{0}     Height:{1}     Frequency:{2}     Color Depth:{3}", this.Int_Width, this.Int_Height, this.Int_Frequency, this.Int_ColorDepth);
         }
+
     }
 }
