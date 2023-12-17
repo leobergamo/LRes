@@ -10,7 +10,7 @@ namespace LRes
     internal class PublicStructures
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct structDevMode //Attribution: Delta76 - https://stackoverflow.com/a/744609
+        public struct Struct_DevMode //Attribution: Delta76 - https://stackoverflow.com/a/744609
         {
 
             private const int CCHDEVICENAME = 0x20;

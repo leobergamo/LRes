@@ -8,13 +8,13 @@ using static LRes.PublicStructures;
 
 namespace LRes
 {
-    internal class DisplayInfo
+    internal class DisplayResolutionInfo
     {
         private int miWidth;
         private int miHeight;
         private int miFrequency;
 
-        public DisplayInfo(int iWidth, int iHeight, int iFrequency) { 
+        public DisplayResolutionInfo(int iWidth, int iHeight, int iFrequency) { 
             this.miWidth = iWidth;
             this.miHeight = iHeight;
             this.miFrequency = iFrequency;

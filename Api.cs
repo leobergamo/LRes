@@ -1,31 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using static LRes.PublicStructures;
-using static LRes.PublicVariables;
+﻿using static LRes.PublicStructures;
 
 namespace LRes
 {
     internal class Api
     {
-        public static List<DisplayInfo> getDisplayResolutionInfo()
+        public static List<DisplayResolutionInfo> getDisplayResolutionInfo()
         {
-            List<DisplayInfo> listDisplayInfo = new List<DisplayInfo>();
+            List<DisplayResolutionInfo> listOfObjects_DisplayResolutionInfo = new List<DisplayResolutionInfo>();
 
-            PublicStructures.structDevMode structDevMode = new PublicStructures.structDevMode();
+            PublicStructures.Struct_DevMode struct_DevMode = new PublicStructures.Struct_DevMode();
 
-            int intCount = 0;
-            while (WinApi.EnumDisplaySettings(null, intCount, ref structDevMode))
+            int int_Count = 0;
+            while (WinApi.EnumDisplaySettings(null, int_Count, ref struct_DevMode))
             {
-                listDisplayInfo.Add(new DisplayInfo(structDevMode.dmPelsWidth, structDevMode.dmPelsHeight, structDevMode.dmDisplayFrequency));
-                intCount++;
+                listOfObjects_DisplayResolutionInfo.Add(new DisplayResolutionInfo(struct_DevMode.dmPelsWidth, struct_DevMode.dmPelsHeight, struct_DevMode.dmDisplayFrequency));
+                int_Count++;
             }
 
-            return listDisplayInfo;
+            return listOfObjects_DisplayResolutionInfo;
         }
     }
 }
