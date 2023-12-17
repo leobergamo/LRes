@@ -51,7 +51,7 @@ namespace LRes
 
         public string ToString()
         {
-            return string.Format("Width:{0} Height:{1} Frequency:{2}", this.Int_Width, this.Int_Height, this.Int_Frequency);
+            return string.Format("Width:{0} Height:{1} Frequency:{2} Color Depth:{3}", this.Int_Width, this.Int_Height, this.Int_Frequency, this.Int_ColorDepth);
         }
     }
 }
