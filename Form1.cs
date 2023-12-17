@@ -11,7 +11,7 @@ namespace LRes
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Api.gatherDisplayInfo();
+            Api.getDisplayResolutionInfo();
         }
     }
 }

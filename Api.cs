@@ -12,19 +12,20 @@ namespace LRes
 {
     internal class Api
     {
-        public static void gatherDisplayInfo()
+        public static List<DisplayInfo> getDisplayResolutionInfo()
         {
-            DEVMODE vDevMode = new DEVMODE();
-            int i = 0;
-            while (WinApi.EnumDisplaySettings(null, i, ref vDevMode))
+            List<DisplayInfo> listDisplayInfo = new List<DisplayInfo>();
+
+            PublicStructures.structDevMode structDevMode = new PublicStructures.structDevMode();
+
+            int intCount = 0;
+            while (WinApi.EnumDisplaySettings(null, intCount, ref structDevMode))
             {
-                Debug.WriteLine("Width:{0} Height:{1} Color:{2} Frequency:{3}",
-                                        vDevMode.dmPelsWidth,
-                                        vDevMode.dmPelsHeight,
-                                        1 << vDevMode.dmBitsPerPel, vDevMode.dmDisplayFrequency
-                                    );
-                i++;
+                listDisplayInfo.Add(new DisplayInfo(structDevMode.dmPelsWidth, structDevMode.dmPelsHeight, structDevMode.dmDisplayFrequency));
+                intCount++;
             }
+
+            return listDisplayInfo;
         }
     }
 }
