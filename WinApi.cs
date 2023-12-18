@@ -13,10 +13,17 @@ namespace LRes
     {
 
         [DllImport("user32.dll")]
-        public static extern bool EnumDisplaySettings(string deviceName, int modeNum, ref Struct_DevMode devMode);
+        public static extern bool EnumDisplaySettings(
+            string deviceName, 
+            int modeNum, 
+            ref PublicStructures.Struct_DevMode devMode
+        );
 
         [DllImport("User32.dll")]
-        public static extern int ChangeDisplaySettings(ref Struct_DevMode devMode, int flags);
+        public static extern int ChangeDisplaySettings(
+            ref PublicStructures.Struct_DevMode devMode, 
+            int flags
+        );       
 
     }
 }

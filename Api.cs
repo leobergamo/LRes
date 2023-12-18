@@ -7,6 +7,11 @@ namespace LRes
 {
     internal class Api
     {
+
+
+
+
+
         public static List<DisplayProfile> getAllDisplayProfiles()
         {
 
@@ -34,6 +39,11 @@ namespace LRes
             return listOfObjects_DisplayResolutionInfo;
         }
 
+
+
+
+
+
         public static void CreateShortcut(string string_shortcutName, string string_shortcutPath, string string_targetFileLocation)
         {
             /*  
@@ -53,6 +63,11 @@ namespace LRes
             object_shortcut.TargetPath = string_targetFileLocation;    // The path of the file that will launch when the shortcut is run
             object_shortcut.Save();                                    // Save the shortcut
         }
+
+
+
+
+
 
         public static DisplayProfile? getCurrentDisplayProfile()
         {
@@ -87,6 +102,11 @@ namespace LRes
                 return null;
             }
         }
+
+
+
+
+
 
         public static bool changeDisplaySettings(int int_screenWidth, int int_screenHeight, int int_screenFrequency, int int_screenColorDepth)
         {
@@ -126,6 +146,11 @@ namespace LRes
             }
         }
 
+
+
+
+
+
         public static bool writeTextToFile(string[] arrayOfstrings_linesOfText, string string_targetFilespec)
         {
             try
@@ -142,6 +167,60 @@ namespace LRes
                 return false;
             }
         }
+
+
+
+
+
+
+        public static void runLinkFile(string string_fileName, string string_workingDirectory, bool bool_wait=true)
+        {
+            ProcessStartInfo processStartInfo_a = new ProcessStartInfo();
+            processStartInfo_a.FileName = string_fileName;
+            processStartInfo_a.WorkingDirectory = string_workingDirectory;
+            processStartInfo_a.UseShellExecute = true;
+            processStartInfo_a.WindowStyle = ProcessWindowStyle.Normal;
+            
+            if(bool_wait)
+            {
+                Process.Start(processStartInfo_a).WaitForExit();
+            }
+            else
+            {
+                Process.Start(processStartInfo_a);
+
+            }
+        }
+
+
+
+
+
+
+        public static void runExecFile(string string_fileName, string string_workingDirectory, bool bool_wait = true)
+        {
+            ProcessStartInfo processStartInfo_a = new ProcessStartInfo();
+            processStartInfo_a.FileName = string_fileName;
+            processStartInfo_a.WorkingDirectory = string_workingDirectory;
+            processStartInfo_a.UseShellExecute = false;
+            processStartInfo_a.WindowStyle = ProcessWindowStyle.Normal;
+
+            if (bool_wait)
+            {
+                Process.Start(processStartInfo_a).WaitForExit();
+            }
+            else
+            {
+                Process.Start(processStartInfo_a);
+
+            }
+        }
+
+
+
+
+
+
     }
 }
 

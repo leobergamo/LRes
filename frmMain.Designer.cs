@@ -44,6 +44,8 @@
             dlgOpenFile = new OpenFileDialog();
             tmrUiMonitor = new System.Windows.Forms.Timer(components);
             btnSave = new Button();
+            label6 = new Label();
+            tbProcToMon = new TextBox();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -104,6 +106,8 @@
             // 
             panel2.AllowDrop = true;
             panel2.BorderStyle = BorderStyle.Fixed3D;
+            panel2.Controls.Add(tbProcToMon);
+            panel2.Controls.Add(label6);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(tbWorkingDirectory);
             panel2.Controls.Add(label3);
@@ -112,7 +116,7 @@
             panel2.Controls.Add(label2);
             panel2.Location = new Point(12, 137);
             panel2.Name = "panel2";
-            panel2.Size = new Size(817, 112);
+            panel2.Size = new Size(817, 162);
             panel2.TabIndex = 1;
             panel2.DragEnter += panel2_DragEnter;
             panel2.DragOver += panel2_DragOver;
@@ -174,10 +178,11 @@
             // 
             // dlgOpenFile
             // 
-            dlgOpenFile.Filter = "Executable Files|*.exe|All Files|*.*";
+            dlgOpenFile.Filter = "Executable Files|*.exe|Link Files|*.lnk";
             dlgOpenFile.InitialDirectory = "C:\\";
             dlgOpenFile.ShowHiddenFiles = true;
             dlgOpenFile.Title = "Select Executable";
+            dlgOpenFile.FileOk += dlgOpenFile_FileOk;
             // 
             // tmrUiMonitor
             // 
@@ -193,6 +198,23 @@
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.ForeColor = Color.DarkGray;
+            label6.Location = new Point(25, 100);
+            label6.Name = "label6";
+            label6.Size = new Size(107, 15);
+            label6.TabIndex = 7;
+            label6.Text = "Process to Monitor";
+            // 
+            // tbProcToMon
+            // 
+            tbProcToMon.Location = new Point(25, 118);
+            tbProcToMon.Name = "tbProcToMon";
+            tbProcToMon.Size = new Size(785, 23);
+            tbProcToMon.TabIndex = 8;
             // 
             // frmMain
             // 
@@ -232,5 +254,7 @@
         private Label label5;
         private System.Windows.Forms.Timer tmrUiMonitor;
         private Button btnSave;
+        private TextBox tbProcToMon;
+        private Label label6;
     }
 }

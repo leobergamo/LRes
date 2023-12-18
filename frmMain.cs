@@ -85,10 +85,13 @@ namespace LRes
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] arrayOfStrings_files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                if (Path.GetFileName(arrayOfStrings_files[0]).Contains(".exe"))
+                string string_filename = Path.GetFileName(arrayOfStrings_files[0]);
+
+                if (string_filename.Contains(".exe") || string_filename.Contains(".lnk"))
                 {
                     tbFilename.Text = Path.GetFileName(arrayOfStrings_files[0]);
                     tbWorkingDirectory.Text = Directory.GetParent(arrayOfStrings_files[0]).FullName;
+                    tbProcToMon.Text = tbFilename.Text;
                 }
                 else
                 {
@@ -116,9 +119,10 @@ namespace LRes
         private void tmrUiMonitor_Tick(object sender, EventArgs e)
         {
             if (
-                comboBox_DisplayProfiles.SelectedIndex >= 0 &&
+                comboBox_DisplayProfiles.SelectedIndex > 0 &&
                 tbFilename.Text != String.Empty &&
-                tbWorkingDirectory.Text != String.Empty
+                tbWorkingDirectory.Text != String.Empty &&
+                tbProcToMon.Text != String.Empty
             )
             {
                 btnSave.Enabled = true;
@@ -139,6 +143,7 @@ namespace LRes
             string[] arrayOfStrings_linesOfText = {
                 string.Format("FILENAME={0}", tbFilename.Text),
                 string.Format("WORKING_DIRECTORY={0}", tbWorkingDirectory.Text),
+                string.Format("PROCESS_TO_MONITOR={0}", tbProcToMon.Text),
                 string.Format("SCREEN_WIDTH={0}", PublicVariables.Object_SelectedDisplayProfile.getWidth()),
                 string.Format("SCREEN_HEIGHT={0}", PublicVariables.Object_SelectedDisplayProfile.getHeight()),
                 string.Format("SCREEN_FREQUENCY={0}", PublicVariables.Object_SelectedDisplayProfile.getFrequency()),
@@ -185,16 +190,16 @@ namespace LRes
                 DisplayProfileComboBoxItem object_displayProfileComboItem = new DisplayProfileComboBoxItem();
                 object_displayProfileComboItem.string_text = object_DisplayProfile.ToString();
                 object_displayProfileComboItem.object_displayProfile = object_DisplayProfile;
-                this.comboBox_DisplayProfiles.Items.Add(object_displayProfileComboItem);
+                comboBox_DisplayProfiles.Items.Add(object_displayProfileComboItem);
             }
 
 
 
         }
 
+        private void dlgOpenFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
 
-
-
-
+        }
     }
 }
