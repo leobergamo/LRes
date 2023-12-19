@@ -44,7 +44,7 @@ namespace LRes
 
 
 
-        public static void CreateShortcut(string string_shortcutName, string string_shortcutPath, string string_targetFileLocation)
+        public static void createShortcut(string string_shortcutName, string string_shortcutPath, string string_targetFileLocation)
         {
             /*  
              *  
@@ -118,8 +118,6 @@ namespace LRes
              *          https://www.c-sharpcorner.com/uploadfile/GemingLeader/changing-display-settings-programmatically/
              *      
              */
-
-            Debug.WriteLine("Changing display settings...\n");
 
             PublicStructures.Struct_DevMode struct_origDevMode = new PublicStructures.Struct_DevMode();
 

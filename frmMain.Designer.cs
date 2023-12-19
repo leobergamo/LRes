@@ -35,6 +35,8 @@
             comboBox_DisplayProfiles = new ComboBox();
             label1 = new Label();
             panel2 = new Panel();
+            tbProcToMon = new TextBox();
+            label6 = new Label();
             label4 = new Label();
             tbWorkingDirectory = new TextBox();
             label3 = new Label();
@@ -44,8 +46,7 @@
             dlgOpenFile = new OpenFileDialog();
             tmrUiMonitor = new System.Windows.Forms.Timer(components);
             btnSave = new Button();
-            label6 = new Label();
-            tbProcToMon = new TextBox();
+            btnClose = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -98,9 +99,9 @@
             label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(93, 17);
+            label1.Size = new Size(51, 17);
             label1.TabIndex = 0;
-            label1.Text = "Display Profile";
+            label1.Text = "Display";
             // 
             // panel2
             // 
@@ -120,6 +121,23 @@
             panel2.TabIndex = 1;
             panel2.DragEnter += panel2_DragEnter;
             panel2.DragOver += panel2_DragOver;
+            // 
+            // tbProcToMon
+            // 
+            tbProcToMon.Location = new Point(25, 118);
+            tbProcToMon.Name = "tbProcToMon";
+            tbProcToMon.Size = new Size(785, 23);
+            tbProcToMon.TabIndex = 8;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.ForeColor = Color.DarkGray;
+            label6.Location = new Point(25, 100);
+            label6.Name = "label6";
+            label6.Size = new Size(107, 15);
+            label6.TabIndex = 7;
+            label6.Text = "Process to Monitor";
             // 
             // label4
             // 
@@ -172,9 +190,9 @@
             label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.Location = new Point(3, 0);
             label2.Name = "label2";
-            label2.Size = new Size(103, 17);
+            label2.Size = new Size(61, 17);
             label2.TabIndex = 1;
-            label2.Text = "Program Profile";
+            label2.Text = "Program";
             // 
             // dlgOpenFile
             // 
@@ -199,22 +217,15 @@
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click;
             // 
-            // label6
+            // btnClose
             // 
-            label6.AutoSize = true;
-            label6.ForeColor = Color.DarkGray;
-            label6.Location = new Point(25, 100);
-            label6.Name = "label6";
-            label6.Size = new Size(107, 15);
-            label6.TabIndex = 7;
-            label6.Text = "Process to Monitor";
-            // 
-            // tbProcToMon
-            // 
-            tbProcToMon.Location = new Point(25, 118);
-            tbProcToMon.Name = "tbProcToMon";
-            tbProcToMon.Size = new Size(785, 23);
-            tbProcToMon.TabIndex = 8;
+            btnClose.Location = new Point(754, 425);
+            btnClose.Name = "btnClose";
+            btnClose.Size = new Size(75, 23);
+            btnClose.TabIndex = 3;
+            btnClose.Text = "Close";
+            btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // frmMain
             // 
@@ -222,13 +233,14 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(841, 450);
+            Controls.Add(btnClose);
             Controls.Add(btnSave);
             Controls.Add(panel2);
             Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             MaximizeBox = false;
             Name = "frmMain";
-            Text = "LRes (c) Leo C. Bergamo";
+            Text = "LRes (c) Leo C. Bergamo - Display Profile  Creator";
             Load += frmMain_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -256,5 +268,6 @@
         private Button btnSave;
         private TextBox tbProcToMon;
         private Label label6;
+        private Button btnClose;
     }
 }

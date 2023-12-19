@@ -19,10 +19,21 @@ namespace LRes
             [CallerLineNumber] int int_lineNumber = 0
         ) {
             string string_timeStamp = DateTime.Now.ToString("yyyy-MM-dd h:mm:ss tt");
+            string string_appName = AppDomain.CurrentDomain.FriendlyName;
+
             Debug.WriteLine(
-                "[ {0} ] NOTICE {1}({2}):{3} - {4}",
+                "[ {0} ] [ NOTICE ] {1}({2}):{3} :: {4}",
                 string_timeStamp,
-                string_fileName,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
+                int_lineNumber,
+                string_memberName,
+                object_message
+            );
+
+            Console.WriteLine(
+                "[ {0} ] [ NOTICE ] {1}({2}):{3} :: {4}",
+                string_timeStamp,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
                 int_lineNumber,
                 string_memberName,
                 object_message
@@ -41,10 +52,21 @@ namespace LRes
             [CallerLineNumber] int int_lineNumber = 0
         ) {
             string string_timeStamp = DateTime.Now.ToString("yyyy-MM-dd h:mm:ss tt");
+            string string_appName = AppDomain.CurrentDomain.FriendlyName;
+
             Debug.WriteLine(
-                "[ {0} ] DEBUG {1}({2}):{3} - {4}",
+                "[ {0} ] [ DEBUG ] {1}({2}):{3} :: {4}",
                 string_timeStamp,
-                string_fileName,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
+                int_lineNumber,
+                string_memberName,
+                object_message
+            );
+
+            Console.WriteLine(
+                "[ {0} ] [ DEBUG ] {1}({2}):{3} :: {4}",
+                string_timeStamp,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
                 int_lineNumber,
                 string_memberName,
                 object_message
@@ -63,10 +85,21 @@ namespace LRes
             [CallerLineNumber] int int_lineNumber = 0
         ) {
             string string_timeStamp = DateTime.Now.ToString("yyyy-MM-dd h:mm:ss tt");
+            string string_appName = AppDomain.CurrentDomain.FriendlyName;
+
             Debug.WriteLine(
-                "[ {0} ] WARNING {1}({2}):{3} - {4}",
+                "[ {0} ] [ WARNING ] {1}({2}):{3} :: {4}",
                 string_timeStamp,
-                string_fileName,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
+                int_lineNumber,
+                string_memberName,
+                object_message
+            );
+
+            Console.WriteLine(
+                "[ {0} ] [ WARNING ] {1}({2}):{3} :: {4}",
+                string_timeStamp,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
                 int_lineNumber,
                 string_memberName,
                 object_message
@@ -86,10 +119,21 @@ namespace LRes
         )
         {
             string string_timeStamp = DateTime.Now.ToString("yyyy-MM-dd h:mm:ss tt");
+            string string_appName = AppDomain.CurrentDomain.FriendlyName;
+
             Debug.WriteLine(
-                "[ {0} ] ERROR {1}({2}):{3} - {4}",
+                "[ {0} ] [ ERROR ] {1}({2}):{3} :: {4}",
                 string_timeStamp,
-                string_fileName,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
+                int_lineNumber,
+                string_memberName,
+                object_message
+            );
+
+            Console.WriteLine(
+                "[ {0} ] [ ERROR ] {1}({2}):{3} :: {4}",
+                string_timeStamp,
+                string_appName + " @ " + Path.GetFileName(string_fileName),
                 int_lineNumber,
                 string_memberName,
                 object_message

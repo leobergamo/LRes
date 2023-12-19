@@ -183,23 +183,36 @@ namespace LRes
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.ListOfObjects_DisplayProfiles = Api.getAllDisplayProfiles();
 
-            foreach (var object_DisplayProfile in ListOfObjects_DisplayProfiles)
+            Log.DEBUG("gathering available display profiles...");
+            List<DisplayProfileComboBoxItem> listOfObject_DisplayProfilesComboBoxItems = new List<DisplayProfileComboBoxItem>();
+
+            foreach (DisplayProfile object_DisplayProfile in Api.getAllDisplayProfiles())
             {
                 DisplayProfileComboBoxItem object_displayProfileComboItem = new DisplayProfileComboBoxItem();
                 object_displayProfileComboItem.string_text = object_DisplayProfile.ToString();
                 object_displayProfileComboItem.object_displayProfile = object_DisplayProfile;
-                comboBox_DisplayProfiles.Items.Add(object_displayProfileComboItem);
+                listOfObject_DisplayProfilesComboBoxItems.Add(object_displayProfileComboItem);
             }
 
+            Log.DEBUG($"Found {listOfObject_DisplayProfilesComboBoxItems.Count} display profiles...");
 
+            comboBox_DisplayProfiles.Items.AddRange(
+                listOfObject_DisplayProfilesComboBoxItems.Distinct().ToArray()
+            );
+
+            listOfObject_DisplayProfilesComboBoxItems.Clear();
 
         }
 
         private void dlgOpenFile_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
