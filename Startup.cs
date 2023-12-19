@@ -31,7 +31,7 @@ namespace LRes
         {
             if (Process.GetProcessesByName(String_ProcessToMonitor).Length == 0)
             {
-                Debug.WriteLine("*** Error: '" + String_ProcessToMonitor + "' process not found running!");
+                Log.DEBUG("'" + String_ProcessToMonitor + "' process not running...");
                 /*Api.changeDisplaySettings(
                     PublicVariables.Object_CurrentDisplayProfile.getWidth(),
                     PublicVariables.Object_CurrentDisplayProfile.getHeight(),
@@ -41,7 +41,7 @@ namespace LRes
             }
             else
             {
-                Debug.WriteLine("*** Message: '" + String_ProcessToMonitor + "' process found running...");
+                Log.DEBUG("'" + String_ProcessToMonitor + "' process running...");
             }
         }
 
@@ -52,17 +52,17 @@ namespace LRes
 
             if (args.Length == 0) 
             {
-                Debug.WriteLine("*** Message: starting GUI...");
+                Log.DEBUG("starting GUI...");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new frmMain());
             }
             else
             {
-                Debug.WriteLine("*** Message: starting headless...");
+                Log.DEBUG("starting headless...");
                 if (args[0].Contains(".lres"))
                 {
-                    Debug.WriteLine("*** Message: parsing file '" + args[0] + "'...");
+                    Log.DEBUG("parsing file '" + args[0] + "'...");
                     using (FileStream fileStream_a = File.OpenRead(args[0]))
                     using (StreamReader streamReader_a = new StreamReader(fileStream_a, Encoding.UTF8, true, Int_BufferSize))
                     {
@@ -73,30 +73,37 @@ namespace LRes
                             {
                                 case true when Regex.IsMatch(string_lineOfText, "^FILENAME=[a-zA-Z]"):
                                     String_Filename = string_lineOfText.Split('=')[1];
+                                    Log.DEBUG("found value 'FILENAME'...");
                                     Int_VerificationCount++;
                                     break;
                                 case true when Regex.IsMatch(string_lineOfText, "^WORKING_DIRECTORY=[a-zA-Z]"):
                                     String_WorkingDirectory = string_lineOfText.Split('=')[1];
+                                    Log.DEBUG("found value 'WORKING_DIRECTORY'...");
                                     Int_VerificationCount++;
                                     break;
                                 case true when Regex.IsMatch(string_lineOfText, "^PROCESS_TO_MONITOR=[a-zA-Z]"):
                                     String_ProcessToMonitor = string_lineOfText.Split('=')[1];
+                                    Log.DEBUG("found value 'PROCESS_TO_MONITOR'...");
                                     Int_VerificationCount++;
                                     break;
                                 case true when Regex.IsMatch(string_lineOfText, "^SCREEN_WIDTH=[0-9]"):
                                     Int_ScreenWidth = Int32.Parse(string_lineOfText.Split('=')[1]);
+                                    Log.DEBUG("found value 'SCREEN_WIDTH'...");
                                     Int_VerificationCount++;
                                     break;
                                 case true when Regex.IsMatch(string_lineOfText, "^SCREEN_HEIGHT=[0-9]"):
                                     Int_ScreenHeight = Int32.Parse(string_lineOfText.Split('=')[1]);
+                                    Log.DEBUG("found value 'SCREEN_HEIGHT'...");
                                     Int_VerificationCount++;
                                     break;
                                 case true when Regex.IsMatch(string_lineOfText, "^SCREEN_FREQUENCY=[0-9]"):
                                     Int_ScreenFrequency = Int32.Parse(string_lineOfText.Split('=')[1]);
+                                    Log.DEBUG("found value 'SCREEN_FREQUENCY'...");
                                     Int_VerificationCount++;
                                     break;
                                 case true when Regex.IsMatch(string_lineOfText, "^SCREEN_COLOR_DEPTH=[0-9]"):
                                     Int_ScreenColorDepth = Int32.Parse(string_lineOfText.Split('=')[1]);
+                                    Log.DEBUG("found value 'SCREEN_COLOR_DEPTH'...");
                                     Int_VerificationCount++;
                                     break;
                                 case true when Regex.IsMatch(string_lineOfText, "^#"):
@@ -105,8 +112,9 @@ namespace LRes
                                     continue;
                             }
                         }
-                        Debug.WriteLine(
-                            "*** Message: values Derived from File --->\n\n" + 
+                        
+                        Log.DEBUG(
+                            "Values Derived from File --->\n\n" + 
                             "\tFilename: " + String_Filename + "\n" +
                             "\tWorking Directory: " + String_WorkingDirectory + "\n" +
                             "\tProcess to Monitor: " + String_ProcessToMonitor + "\n" +
@@ -120,104 +128,129 @@ namespace LRes
 
                         if (Int_VerificationCount < 7)
                         {
-                            Debug.WriteLine("*** Error: file verification failed!");
+                            Log.ERROR("file verification failed!");
                             MessageBox.Show(
                                 "File verification failed!",
                                 "LRes - Critical Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error
                             );
+                            Log.DEBUG("terminating...");
                             Environment.Exit(1);
 
                         }
 
-                        Debug.WriteLine("*** Message: changing screen profile...");
+                        Log.DEBUG("changing screen profile to the one defined in file...");
                         if (Api.changeDisplaySettings(Int_ScreenWidth, Int_ScreenHeight, Int_ScreenFrequency, Int_ScreenColorDepth))
                         {
-                            Debug.WriteLine("*** Message: screen profile changed...");
+                            Log.DEBUG("success");
                             Thread.Sleep(2000);
 
                             if (String_Filename.Contains(".lnk"))
                             {
-                                Debug.WriteLine("*** Message: starting program indirectly using link...");
+                                Log.DEBUG("starting program indirectly...");
                                 Api.runLinkFile(String_Filename, String_WorkingDirectory, false);
 
                                 Thread.Sleep(15000);
 
-                                Debug.WriteLine("*** Message: starting process monitor...");
+                                Log.DEBUG("starting process monitor...");
 
                                 while (true)
                                 {
                                     if (Process.GetProcessesByName(String_ProcessToMonitor).Length == 0)
                                     {
-                                        Debug.WriteLine("*** Message: '" + String_ProcessToMonitor + "' process not found!");
+                                        Log.DEBUG("'" + String_ProcessToMonitor + "' process not running...");
+                                        Log.DEBUG("reverting display profile...");
                                         Thread.Sleep(1000);
-                                        Api.changeDisplaySettings(
+
+                                        if(
+                                            Api.changeDisplaySettings(
                                             PublicVariables.Object_CurrentDisplayProfile.getWidth(),
                                             PublicVariables.Object_CurrentDisplayProfile.getHeight(),
                                             PublicVariables.Object_CurrentDisplayProfile.getFrequency(),
                                             PublicVariables.Object_CurrentDisplayProfile.getColorDepth()
-                                        );
+                                            )
+                                        )
+                                        {
+                                            Log.DEBUG("success");
+                                        } else
+                                        {
+                                            Log.ERROR("failed to revert display profile...");
+                                        }
                                         break;
                                     }
                                     else
                                     {
-                                        Debug.WriteLine("*** Message: '" + String_ProcessToMonitor + "' process found...");
+                                        Log.DEBUG("'" + String_ProcessToMonitor + "' process running...");
                                     }
                                     Thread.Sleep(5000);
                                 }
+                                Log.DEBUG("terminating...");
                             }
                             else if (String_Filename.Contains(".exe"))
                             {
-                                Debug.WriteLine("*** Message: starting program directly using executable...");
+                                Log.DEBUG("starting program directly...");
                                 Api.runExecFile(String_Filename, String_WorkingDirectory, false);
 
                                 Thread.Sleep(15000);
 
-                                Debug.WriteLine("*** Message: starting process monitor...");
+                                Log.DEBUG("starting process monitor...");
 
                                 while (true)
                                 {
                                     if (Process.GetProcessesByName(String_ProcessToMonitor).Length == 0)
                                     {
-                                        Debug.WriteLine("*** Message: '" + String_ProcessToMonitor + "' process not found!");
+                                        Log.DEBUG("'" + String_ProcessToMonitor + "' process not running...");
+                                        Log.DEBUG("reverting display profile...");
                                         Thread.Sleep(1000);
-                                        Api.changeDisplaySettings(
-                                            PublicVariables.Object_CurrentDisplayProfile.getWidth(),
-                                            PublicVariables.Object_CurrentDisplayProfile.getHeight(),
-                                            PublicVariables.Object_CurrentDisplayProfile.getFrequency(),
-                                            PublicVariables.Object_CurrentDisplayProfile.getColorDepth()
-                                        );
+                                        if(
+                                            Api.changeDisplaySettings(
+                                                PublicVariables.Object_CurrentDisplayProfile.getWidth(),
+                                                PublicVariables.Object_CurrentDisplayProfile.getHeight(),
+                                                PublicVariables.Object_CurrentDisplayProfile.getFrequency(),
+                                                PublicVariables.Object_CurrentDisplayProfile.getColorDepth()
+                                            )
+                                        )
+                                        {
+                                            Log.DEBUG("success");
+                                        }
+                                        else
+                                        {
+                                            Log.ERROR("failed to revert display profile...");
+                                        }
                                         break;
                                     }
                                     else
                                     {
-                                        Debug.WriteLine("*** Message: '" + String_ProcessToMonitor + "' process found...");
+                                        Log.DEBUG("'" + String_ProcessToMonitor + "' process running...");
                                     }
                                     Thread.Sleep(5000);
                                 }
+                                Log.DEBUG("terminating...");
                             }
                             else
                             {
-                                Debug.WriteLine("*** Error: program failed to launch! Filename is neither executable or link...");
+                                Log.ERROR("filename is neither executable or link!");
                                 MessageBox.Show(
                                     "Failed to launch program!",
                                     "LRes - Critical Error",
                                     MessageBoxButtons.OK,
                                     MessageBoxIcon.Error
                                 );
+                                Log.DEBUG("terminating...");
                                 Environment.Exit(1);                                
                             }
                         }
                         else
                         {
-                            Debug.WriteLine("*** Error: failed to change display profile!");
+                            Log.ERROR("failed to change display profile!");
                             MessageBox.Show(
                                 "Failed to change display settings!",
                                 "LRes - Critical Error",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Error
                             );
+                            Log.DEBUG("terminating...");
                             Environment.Exit(1);
                         }
                     }
