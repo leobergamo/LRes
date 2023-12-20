@@ -47,6 +47,8 @@
             tmrUiMonitor = new System.Windows.Forms.Timer(components);
             btnSave = new Button();
             btnClose = new Button();
+            tbSynopsis = new TextBox();
+            label7 = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             SuspendLayout();
@@ -227,12 +229,36 @@
             btnClose.UseVisualStyleBackColor = true;
             btnClose.Click += btnClose_Click;
             // 
+            // tbSynopsis
+            // 
+            tbSynopsis.BorderStyle = BorderStyle.FixedSingle;
+            tbSynopsis.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tbSynopsis.Location = new Point(12, 336);
+            tbSynopsis.Multiline = true;
+            tbSynopsis.Name = "tbSynopsis";
+            tbSynopsis.ReadOnly = true;
+            tbSynopsis.Size = new Size(817, 83);
+            tbSynopsis.TabIndex = 4;
+            tbSynopsis.TextAlign = HorizontalAlignment.Center;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label7.Location = new Point(7, 316);
+            label7.Name = "label7";
+            label7.Size = new Size(61, 17);
+            label7.TabIndex = 5;
+            label7.Text = "Synopsis";
+            // 
             // frmMain
             // 
             AllowDrop = true;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(841, 450);
+            Controls.Add(label7);
+            Controls.Add(tbSynopsis);
             Controls.Add(btnClose);
             Controls.Add(btnSave);
             Controls.Add(panel2);
@@ -247,6 +273,7 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -269,5 +296,7 @@
         private TextBox tbProcToMon;
         private Label label6;
         private Button btnClose;
+        private TextBox tbSynopsis;
+        private Label label7;
     }
 }

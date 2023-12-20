@@ -118,19 +118,45 @@ namespace LRes
 
         private void tmrUiMonitor_Tick(object sender, EventArgs e)
         {
+
+
+            if(comboBox_DisplayProfiles.SelectedIndex >= 0)
+            {
+                panel2.Enabled = true;
+            } else panel2.Enabled = false;
+
+
+
             if (
-                comboBox_DisplayProfiles.SelectedIndex > 0 &&
+                comboBox_DisplayProfiles.SelectedIndex >= 0 &&
                 tbFilename.Text != String.Empty &&
                 tbWorkingDirectory.Text != String.Empty &&
                 tbProcToMon.Text != String.Empty
-            )
-            {
+            ) {
                 btnSave.Enabled = true;
-            }
-            else
-            {
-                btnSave.Enabled = false;
-            }
+            } else btnSave.Enabled = false;
+
+
+
+            if (btnSave.Enabled) { 
+                tbSynopsis.Text =
+                    $"Execute program or link: " +
+                    $"'{tbWorkingDirectory.Text}\\{tbFilename.Text}'" +
+                    " using resolution: '" +
+                    $"{PublicVariables.Object_SelectedDisplayProfile.getWidth().ToString()}" +
+                    "x" +
+                    $"{PublicVariables.Object_SelectedDisplayProfile.getHeight().ToString()}', " +
+                    "using screen refresh rate: " +
+                    $"'{PublicVariables.Object_SelectedDisplayProfile.getFrequency().ToString()}Hz'," +
+                    " using screen color depth: " +
+                    $"'{PublicVariables.Object_SelectedDisplayProfile.getColorDepth().ToString()}BPP'" +
+                    " while watching process: " +
+                    $"'{tbProcToMon.Text}'" +
+                    "...";
+                btnSave.Enabled = true;
+            } else tbSynopsis.Text = "...";
+
+
         }
 
 
@@ -147,7 +173,8 @@ namespace LRes
                 string.Format("SCREEN_WIDTH={0}", PublicVariables.Object_SelectedDisplayProfile.getWidth()),
                 string.Format("SCREEN_HEIGHT={0}", PublicVariables.Object_SelectedDisplayProfile.getHeight()),
                 string.Format("SCREEN_FREQUENCY={0}", PublicVariables.Object_SelectedDisplayProfile.getFrequency()),
-                string.Format("SCREEN_COLOR_DEPTH={0}", PublicVariables.Object_SelectedDisplayProfile.getColorDepth())
+                string.Format("SCREEN_COLOR_DEPTH={0}", PublicVariables.Object_SelectedDisplayProfile.getColorDepth()),
+                string.Format("SYNOPSIS={0}", tbSynopsis.Text)
             };
 
             if (
