@@ -44,8 +44,11 @@ namespace LRes
 
 
 
-        public static void createShortcut(string string_shortcutName, string string_shortcutPath, string string_targetFileLocation)
-        {
+        public static void createShortcut(
+            string string_shortcutName, 
+            string string_shortcutPath, 
+            string string_targetFileLocation
+        ) {
             /*  
              *  
              *  Attribution:
@@ -108,8 +111,12 @@ namespace LRes
 
 
 
-        public static bool changeDisplaySettings(int int_screenWidth, int int_screenHeight, int int_screenFrequency, int int_screenColorDepth)
-        {
+        public static bool changeDisplaySettings(
+            int int_screenWidth, 
+            int int_screenHeight, 
+            int int_screenFrequency, 
+            int int_screenColorDepth
+        ) {
 
             /*  
              *  
@@ -171,7 +178,7 @@ namespace LRes
 
 
 
-        public static void runLinkFile(string string_fileName, string string_workingDirectory, bool bool_wait=true)
+        public static void runLinkFile(string string_fileName, string string_workingDirectory, bool bool_wait)
         {
             ProcessStartInfo processStartInfo_a = new ProcessStartInfo();
             processStartInfo_a.FileName = string_fileName;
@@ -195,7 +202,7 @@ namespace LRes
 
 
 
-        public static void runExecFile(string string_fileName, string string_workingDirectory, bool bool_wait = true)
+        public static void runExecFile(string string_fileName, string string_workingDirectory, bool bool_wait)
         {
             ProcessStartInfo processStartInfo_a = new ProcessStartInfo();
             processStartInfo_a.FileName = string_fileName;
