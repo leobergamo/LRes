@@ -36,13 +36,13 @@
             comboBox_DisplayProfiles = new ComboBox();
             label1 = new Label();
             panel2 = new Panel();
+            tbFilename = new TextBox();
             tbProcToMon = new TextBox();
             label6 = new Label();
             label4 = new Label();
             tbWorkingDirectory = new TextBox();
             label3 = new Label();
             btnBrowse = new Button();
-            tbFilename = new TextBox();
             label2 = new Label();
             dlgOpenFile = new OpenFileDialog();
             tmrUiMonitor = new System.Windows.Forms.Timer(components);
@@ -56,7 +56,7 @@
             // 
             // panel1
             // 
-            panel1.BorderStyle = BorderStyle.Fixed3D;
+            panel1.BackColor = Color.Transparent;
             panel1.Controls.Add(label5);
             panel1.Controls.Add(btnTest);
             panel1.Controls.Add(comboBox_DisplayProfiles);
@@ -69,7 +69,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.ForeColor = Color.DarkGray;
+            label5.ForeColor = Color.RoyalBlue;
             label5.Location = new Point(25, 17);
             label5.Name = "label5";
             label5.Size = new Size(138, 15);
@@ -100,7 +100,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(3, 0);
+            label1.Location = new Point(0, 0);
             label1.Name = "label1";
             label1.Size = new Size(51, 17);
             label1.TabIndex = 0;
@@ -109,14 +109,14 @@
             // panel2
             // 
             panel2.AllowDrop = true;
-            panel2.BorderStyle = BorderStyle.Fixed3D;
+            panel2.BackColor = Color.Transparent;
+            panel2.Controls.Add(tbFilename);
             panel2.Controls.Add(tbProcToMon);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(tbWorkingDirectory);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(btnBrowse);
-            panel2.Controls.Add(tbFilename);
             panel2.Controls.Add(label2);
             panel2.Location = new Point(12, 137);
             panel2.Name = "panel2";
@@ -125,9 +125,16 @@
             panel2.DragEnter += panel2_DragEnter;
             panel2.DragOver += panel2_DragOver;
             // 
+            // tbFilename
+            // 
+            tbFilename.Location = new Point(25, 35);
+            tbFilename.Name = "tbFilename";
+            tbFilename.Size = new Size(745, 23);
+            tbFilename.TabIndex = 2;
+            // 
             // tbProcToMon
             // 
-            tbProcToMon.Location = new Point(25, 118);
+            tbProcToMon.Location = new Point(25, 123);
             tbProcToMon.Name = "tbProcToMon";
             tbProcToMon.Size = new Size(785, 23);
             tbProcToMon.TabIndex = 8;
@@ -135,8 +142,8 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.ForeColor = Color.DarkGray;
-            label6.Location = new Point(25, 100);
+            label6.ForeColor = Color.RoyalBlue;
+            label6.Location = new Point(25, 105);
             label6.Name = "label6";
             label6.Size = new Size(107, 15);
             label6.TabIndex = 7;
@@ -145,8 +152,8 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.ForeColor = Color.DarkGray;
-            label4.Location = new Point(25, 56);
+            label4.ForeColor = Color.RoyalBlue;
+            label4.Location = new Point(25, 61);
             label4.Name = "label4";
             label4.Size = new Size(103, 15);
             label4.TabIndex = 6;
@@ -155,7 +162,7 @@
             // tbWorkingDirectory
             // 
             tbWorkingDirectory.Enabled = false;
-            tbWorkingDirectory.Location = new Point(25, 74);
+            tbWorkingDirectory.Location = new Point(25, 79);
             tbWorkingDirectory.Name = "tbWorkingDirectory";
             tbWorkingDirectory.Size = new Size(785, 23);
             tbWorkingDirectory.TabIndex = 5;
@@ -163,7 +170,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.ForeColor = Color.DarkGray;
+            label3.ForeColor = Color.RoyalBlue;
             label3.Location = new Point(25, 17);
             label3.Name = "label3";
             label3.Size = new Size(55, 15);
@@ -172,7 +179,7 @@
             // 
             // btnBrowse
             // 
-            btnBrowse.Location = new Point(776, 29);
+            btnBrowse.Location = new Point(776, 35);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new Size(34, 23);
             btnBrowse.TabIndex = 3;
@@ -180,18 +187,11 @@
             btnBrowse.UseVisualStyleBackColor = true;
             btnBrowse.Click += btnBrowse_Click;
             // 
-            // tbFilename
-            // 
-            tbFilename.Location = new Point(25, 30);
-            tbFilename.Name = "tbFilename";
-            tbFilename.Size = new Size(745, 23);
-            tbFilename.TabIndex = 2;
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(3, 0);
+            label2.Location = new Point(0, 0);
             label2.Name = "label2";
             label2.Size = new Size(61, 17);
             label2.TabIndex = 1;
@@ -212,7 +212,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(12, 425);
+            btnSave.Location = new Point(12, 453);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 23);
             btnSave.TabIndex = 2;
@@ -222,7 +222,7 @@
             // 
             // btnClose
             // 
-            btnClose.Location = new Point(754, 425);
+            btnClose.Location = new Point(754, 453);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(75, 23);
             btnClose.TabIndex = 3;
@@ -232,21 +232,21 @@
             // 
             // tbSynopsis
             // 
-            tbSynopsis.BorderStyle = BorderStyle.FixedSingle;
             tbSynopsis.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            tbSynopsis.Location = new Point(12, 336);
+            tbSynopsis.Location = new Point(37, 336);
             tbSynopsis.Multiline = true;
             tbSynopsis.Name = "tbSynopsis";
             tbSynopsis.ReadOnly = true;
-            tbSynopsis.Size = new Size(817, 83);
+            tbSynopsis.Size = new Size(785, 83);
             tbSynopsis.TabIndex = 4;
             tbSynopsis.TextAlign = HorizontalAlignment.Center;
             // 
             // label7
             // 
             label7.AutoSize = true;
+            label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label7.Location = new Point(7, 316);
+            label7.Location = new Point(12, 316);
             label7.Name = "label7";
             label7.Size = new Size(61, 17);
             label7.TabIndex = 5;
@@ -257,14 +257,16 @@
             AllowDrop = true;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(841, 450);
+            BackgroundImage = Resource1.default_app_bg;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(841, 488);
             Controls.Add(label7);
             Controls.Add(tbSynopsis);
             Controls.Add(btnClose);
             Controls.Add(btnSave);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.Fixed3D;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "frmMain";

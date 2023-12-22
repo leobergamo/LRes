@@ -45,10 +45,13 @@ namespace LRes
 
 
         public static void createShortcut(
-            string string_shortcutName, 
-            string string_shortcutPath, 
-            string string_targetFileLocation
-        ) {
+            string string_shortcutName,
+            string string_workingDirectory,
+            string string_targetFileLocation,
+            string string_shortcutDescription = ""
+
+        )
+        {
             /*  
              *  
              *  Attribution:
@@ -57,14 +60,19 @@ namespace LRes
              *      
              */
 
-            string string_shortcutLocation = System.IO.Path.Combine(string_shortcutPath, string_shortcutName + ".lnk");
-            WshShell object_shell = new WshShell();
-            IWshShortcut object_shortcut = (IWshShortcut)object_shell.CreateShortcut(string_shortcutLocation);
+            string string_linkPath = $"{string_workingDirectory}\\Run {string_shortcutName} using LRes.lnk";
 
-            object_shortcut.Description = string_shortcutName;   // The description of the shortcut
-            object_shortcut.IconLocation = @"c:\myicon.ico";           // The icon of the shortcut
-            object_shortcut.TargetPath = string_targetFileLocation;    // The path of the file that will launch when the shortcut is run
-            object_shortcut.Save();                                    // Save the shortcut
+            WshShell object_shell = new WshShell();
+            IWshShortcut object_shortcut = (IWshShortcut)object_shell.CreateShortcut(string_linkPath);
+
+            Log.DEBUG(PublicVariables.String_AppWorkingDirectory);
+
+            object_shortcut.Description = string_shortcutDescription;                        // The description of the shortcut
+            object_shortcut.IconLocation = PublicVariables.String_AppWorkingDirectory + "\\LRes.ico"; // The icon of the shortcut
+            object_shortcut.TargetPath = string_targetFileLocation;                   // The path of the file that will launch when the shortcut is run
+            object_shortcut.WorkingDirectory = string_workingDirectory;
+            object_shortcut.Save();                                                   // Save the shortcut
+
         }
 
 
@@ -112,11 +120,12 @@ namespace LRes
 
 
         public static bool changeDisplaySettings(
-            int int_screenWidth, 
-            int int_screenHeight, 
-            int int_screenFrequency, 
+            int int_screenWidth,
+            int int_screenHeight,
+            int int_screenFrequency,
             int int_screenColorDepth
-        ) {
+        )
+        {
 
             /*  
              *  
@@ -166,7 +175,7 @@ namespace LRes
                         streamWriter_outputFile.WriteLine(string_lineOfText);
                 }
                 return true;
-            } 
+            }
             catch (Exception object_exception)
             {
                 return false;
@@ -185,8 +194,8 @@ namespace LRes
             processStartInfo_a.WorkingDirectory = string_workingDirectory;
             processStartInfo_a.UseShellExecute = true;
             processStartInfo_a.WindowStyle = ProcessWindowStyle.Normal;
-            
-            if(bool_wait)
+
+            if (bool_wait)
             {
                 Process.Start(processStartInfo_a).WaitForExit();
             }

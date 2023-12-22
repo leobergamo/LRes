@@ -184,6 +184,12 @@ namespace LRes
                 )
             )
             {
+                Api.createShortcut(
+                    Path.GetFileNameWithoutExtension(tbFilename.Text),
+                    Environment.GetFolderPath(Environment.SpecialFolder.Desktop), 
+                    PublicVariables.String_AppWorkingDirectory + "\\" + Path.GetFileNameWithoutExtension(tbFilename.Text) + ".lres",
+                    tbSynopsis.Text
+                );
                 MessageBox.Show("Configuration saved!");
             }
             else

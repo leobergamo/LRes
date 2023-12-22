@@ -61,11 +61,21 @@ namespace LRes {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap default_app_bg {
+            get {
+                object obj = ResourceManager.GetObject("default_app_bg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
-        internal static System.Drawing.Icon LResIcon {
+        internal static System.Drawing.Icon LRes {
             get {
-                object obj = ResourceManager.GetObject("LResIcon", resourceCulture);
+                object obj = ResourceManager.GetObject("LRes", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
             }
         }
